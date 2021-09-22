@@ -23,7 +23,12 @@ Assignment one:
 <br>  
 <br>3
 <br>What was positive and good about using TDD?
+<br>-I got a better understanding of the needed functions, and got a good idea for what they needed to be able to output.
 <br>What was annoying or difficult?
+<br>-The main annoying part was that intellijs testing was set up so that classes should be made before tests to better link them.
+<br>-Wuth how little functionality it seemed like a lot of work in preplanning for something relatively straight foward
 <br>What surprised you?
+<br>-Nothing really.
 <br>Did TDD help you write some tests you wouldn’t otherwise have thought of?
+<br>-Unfortunatly no, might be something wrong with how i comprehended the way it's supposed to be used, or the functionality was not that diverse so not much made sense to test.
 
