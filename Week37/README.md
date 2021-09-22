@@ -30,5 +30,5 @@ Assignment one:
 <br>What surprised you?
 <br>-Nothing really.
 <br>Did TDD help you write some tests you wouldn’t otherwise have thought of?
-<br>-Unfortunatly no, might be something wrong with how i comprehended the way it's supposed to be used, or the functionality was not that diverse so not much made sense to test.
+<br>-Unfortunatly no, might be something wrong with how i comprehended the way it's supposed to be used, or the functionality was not that diverse so there wasn't much to test.
 
