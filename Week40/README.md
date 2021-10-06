@@ -8,24 +8,31 @@ make sure that it is of the highest quality.
 <br><br>Catastrophic failure
 <br>Find a story where a software system defect had a bad outcome. Describe
 what happened. Can you identify a test that would have prevented it?
-<br>Amazons new world causes problems with high end gpus. A small percentage of players experiences bricking of their brand new GPUs.
-<br>The problem is both with amazon and the GPU manufacturer.
-<br>The GPU manufactorers should've stress tested their products better as they claim a soldering problem contributed to the problems.
-<br>Amazon should've had a wide array of machines to stress test their game on.
+<br>-Amazons new world causes problems with high end gpus. A small percentage of players experiences bricking of their brand new GPUs.
+<br>-The problem is both with amazon and the GPU manufacturer.
+<br>-The GPU manufactorers should've stress tested their products better as they claim a soldering problem contributed to the problems.
+<br>-Amazon should've had a wide array of machines to stress test their game on.
 
 <br><br>Investigation of tools
 
 <br><br>JUnit 5
 <br>Investigate JUnit 5 (Jupiter). Explain the following, and how they are useful.
 <br>• @Tag
-<br>
+<br>A way to categorise test for filtering and describing.
 <br>• @Disabled
+<br>Prevents the test from being run, can be used to make sure deprecated functionality doesn't break, by having some test ready to test it thouroughly.
 <br>• @RepeatedTest
+<br>The test is repeated according to the paramaters set up, useful to test for variance.
 <br>• @BeforeEach, @AfterEach
+<br>Activates some code before and after all test, useful to setup functionality that needs to be clean in every instance of tests.
 <br>• @BeforeAll, @AfterAll
+<br>Sames as above but only once for the class, useful for setting down and tearing down variables and functionality that many tests will use.
 <br>• @DisplayName
+<br>Used to give a custom name to tests, can be used to ease understanding of the tests.
 <br>• @Nested
+<br>Used to denote a new Test class in a test class, useful for splitting tests into parts that test specific areas/scenarios of the functionality
 <br>• assumeFalse, assumeTrue
+<br>
 
 <br><br>Mocking frameworks
 <br>Investigate mocking frameworks for your preferred language. Choose at least
