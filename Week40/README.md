@@ -32,12 +32,16 @@ what happened. Can you identify a test that would have prevented it?
 <br>• @Nested
 <br>Used to denote a new Test class in a test class, useful for splitting tests into parts that test specific areas/scenarios of the functionality
 <br>• assumeFalse, assumeTrue
-<br>
+<br>Used to test if it makes sense to continue the test, stops the test from running if the assumption about the needed functionality is wrong.
 
 <br><br>Mocking frameworks
 <br>Investigate mocking frameworks for your preferred language. Choose at least
 two frameworks, and answer the questions. (One could be Mockito, which
 we saw in class.)
+<br>JMOCKIT vs MOCKITO
 <br>• What are their similarities?
+<br>Both mocking languages, can utilize static method/constructor mocking.
 <br>• What are their differences?
+<br>MOCKITO has inconsistencies in invoking methods JMOCKIT doesn't, MOCKITO has no built-in coverage report upposed to JMOCKIT, MOCKITO is easier to learn than JMOCKIT, its harder to utilize custom argument matching in MOCKITO, MOCKITO is the larger and much more well know of the 2, MOCKITO utilizes proxy api design arcitechture whilst JMOCKIT uses Java 1.5 instrumentation api framework. 
 <br>• Which one would you prefer, if any, and why?
+<br>I would be up for learning either as i haven't really utiized a mocking tool yet, would maybe prefer JMOCKIT as it's based on java which I'm very familiar with. 
