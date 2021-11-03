@@ -3,7 +3,11 @@ package integration.datalayer.employee;
 import com.github.javafaker.Faker;
 import datalayer.customer.CustomerStorage;
 import datalayer.customer.CustomerStorageImpl;
+import datalayer.employee.EmployeeStorage;
+import datalayer.employee.EmployeeStorageImpl;
 import dto.CustomerCreation;
+import dto.Employee;
+import dto.EmployeeCreation;
 import integration.ContainerizedDbIntegrationTest;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Tag;
@@ -18,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @Tag("integration")
 class CreateEmployeeTest extends ContainerizedDbIntegrationTest {
-    private CustomerStorage customerStorage;
+    private EmployeeStorage employeeStorage;
 
     /* changed code */
 
@@ -26,33 +30,34 @@ class CreateEmployeeTest extends ContainerizedDbIntegrationTest {
     public void Setup() throws SQLException {
         runMigration(2);
 
-        customerStorage = new CustomerStorageImpl(getConnectionString(), "root", getDbPassword());
+        employeeStorage = new EmployeeStorageImpl(getConnectionString(), "root", getDbPassword());
 
-        var numCustomers = customerStorage.getCustomers().size();
-        if (numCustomers < 100) {
-            addFakeCustomers(100 - numCustomers);
+        var numEmployees = employeeStorage.getEmployees().size();
+        if (numEmployees < 100) {
+            addFakeEmployees(100 - numEmployees);
         }
     }
 
-    private void addFakeCustomers(int numCustomers) throws SQLException {
+    private void addFakeEmployees(int numEmployees) throws SQLException {
         Faker faker = new Faker();
-        for (int i = 0; i < numCustomers; i++) {
-            CustomerCreation c = new CustomerCreation(faker.name().firstName(), faker.name().lastName(), null, null);
-            customerStorage.createCustomer(c);
+        for (int i = 0; i < numEmployees; i++) {
+            java.sql.Date sqlStartDate = new java.sql.Date(faker.date().birthday().getTime());
+            EmployeeCreation c = new EmployeeCreation(faker.name().firstName(), faker.name().lastName(), sqlStartDate);
+            employeeStorage.createEmployee(c);
         }
 
     }
 
     @Test
-    public void mustSaveCustomerInDatabaseWhenCallingCreateCustomer() throws SQLException {
+    public void mustSaveEmployeeInDatabaseWhenCallingCreateCustomer() throws SQLException {
         // Arrange
         // Act
-        customerStorage.createCustomer(new CustomerCreation("John","Carlssonn", null, null));
+        employeeStorage.createEmployee(new EmployeeCreation("John","Carlssonn", null));
 
         // Assert
-        var customers = customerStorage.getCustomers();
+        var employees = employeeStorage.getEmployees();
         assertTrue(
-                customers.stream().anyMatch(x ->
+                employees.stream().anyMatch(x ->
                         x.getFirstname().equals("John") &&
                         x.getLastname().equals("Carlssonn")));
     }
@@ -61,8 +66,8 @@ class CreateEmployeeTest extends ContainerizedDbIntegrationTest {
     public void mustReturnLatestId() throws SQLException {
         // Arrange
         // Act
-        var id1 = customerStorage.createCustomer(new CustomerCreation("a", "b", null, null));
-        var id2 = customerStorage.createCustomer(new CustomerCreation("c", "d" , null , null));
+        var id1 = employeeStorage.createEmployee(new EmployeeCreation("a", "b", null));
+        var id2 = employeeStorage.createEmployee(new EmployeeCreation("c", "d" , null));
 
         // Assert
         assertEquals(1, id2 - id1);
