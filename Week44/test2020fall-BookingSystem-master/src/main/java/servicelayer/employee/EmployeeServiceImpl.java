@@ -1,12 +1,13 @@
 package servicelayer.employee;
 
 import dto.Employee;
-import servicelayer.customer.CustomerServiceException;
 
-public class EmployeeServiceImpl implements EmployeService{
+import java.sql.Date;
+
+public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
-    public int createEmployee(Employee employee) throws EmployeeServiceException {
+    public int createEmployee(String firstName, String lastName, Date birthdate) throws EmployeeServiceException {
         return 0;
     }
 
