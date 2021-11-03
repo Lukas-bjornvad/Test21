@@ -56,7 +56,6 @@ public class CustomerStorageImpl implements CustomerStorage {
                     results.add(c);
                 }
             }
-
             return results;
         }
     }
