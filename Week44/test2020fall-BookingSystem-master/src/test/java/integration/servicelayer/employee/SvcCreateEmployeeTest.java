@@ -42,14 +42,13 @@ class SvcCreateEmployeeTest extends ContainerizedDbIntegrationTest {
     @Test
     public void mustSaveEmployeeToDatabaseWhenCallingCreateEmployee() throws EmployeeServiceException, SQLException {
         // Arrange
-        var employeeID = 987654321;
         var firstname = "Luke";
         var lastname = "Skywalker";
         var birthdate = new Date(1234l);
         int id = svc.createEmployee(firstname, lastname, birthdate);
 
         // Act
-        var createdEmployee = svc.getEmployeeById(employeeID);
+        var createdEmployee = svc.getEmployeeById(id);
 
         // Assert
         assertEquals(firstname, createdEmployee.getFirstname());

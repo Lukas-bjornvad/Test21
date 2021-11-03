@@ -76,12 +76,13 @@ class SvcCreateBookingTest extends ContainerizedDbIntegrationTest {
         var end = new Time(1234567l);
         svc.createBooking(customerID, employeeID, date, start, end);
 
+
         // Act
-        var createdBooking = storage.getBookingsForCustomer(customerID);
+        var createdBooking = storage.getBookings().get(0);
+
 
         // Assert
-
-        assertEquals(customerID, createdBooking.iterator().next().getCustomerID());
-        assertEquals(employeeID, createdBooking.iterator().next().getEmployeeID());
+        assertEquals(customerID, createdBooking.getCustomerID());
+        assertEquals(employeeID, createdBooking.getEmployeeID());
     }
 }
