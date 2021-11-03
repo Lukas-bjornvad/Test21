@@ -60,7 +60,7 @@ public class EmployeeStorageImpl implements EmployeeStorage{
                     var id = resultSet.getInt("ID");
                     var firstname = resultSet.getString("firstname");
                     var lastname = resultSet.getString("lastname");
-                    var date = resultSet.getDate("date");
+                    var date = resultSet.getDate("birthdate");
                     employees.add(new Employee(id, firstname, lastname,date));
                 }
                 return employees;

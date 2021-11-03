@@ -28,7 +28,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee getEmployeeById(int employeeId) {
-        return null;
+    public Employee getEmployeeById(int employeeId) throws SQLException {
+        return employeeStorage.getEmployeeWithId(employeeId).iterator().next();
     }
 }

@@ -26,6 +26,7 @@ public class BookingServiceImpl implements BookingService{
         try {
             return bookingStorage.createBooking(new BookingCreation(customerId, employeeId, date, start, end));
         } catch (SQLException throwables) {
+            throwables.printStackTrace();
             throw new BookingServiceException(throwables.getMessage());
         }
     }
