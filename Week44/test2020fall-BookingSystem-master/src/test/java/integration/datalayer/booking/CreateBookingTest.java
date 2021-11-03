@@ -20,8 +20,8 @@ class CreateBookingTest extends ContainerizedDbIntegrationTest {
     private BookingStorage bookingStorage;
 
     /* changed code */
-
-    /*@BeforeAll
+/*
+    @BeforeAll
     public void Setup() throws SQLException {
         runMigration(2);
 

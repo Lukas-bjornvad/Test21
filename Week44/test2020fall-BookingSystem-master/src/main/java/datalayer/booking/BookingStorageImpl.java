@@ -55,7 +55,7 @@ public class BookingStorageImpl implements BookingStorage{
         }
     }
 
-
+    @Override
     public List<Booking> getBookings() throws SQLException {
         try (var con = getConnection();
              var stmt = con.createStatement()) {
