@@ -41,7 +41,8 @@ class CreateBookingTest extends ContainerizedDbIntegrationTest {
         for (int i = 0; i < numBookings; i++) {
             var time = new Time(12345678);
             var time2 = new Time(12345678);
-            BookingCreation c = new BookingCreation(faker.idNumber().hashCode(), faker.idNumber().hashCode(), (Date)  faker.date().birthday(),time,time2);
+            java.sql.Date sqlStartDate = new java.sql.Date(faker.date().birthday().getTime());
+            BookingCreation c = new BookingCreation(faker.idNumber().hashCode(), faker.idNumber().hashCode(), sqlStartDate,time,time2);
             bookingStorage.createBooking(c);
         }
 

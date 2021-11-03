@@ -28,7 +28,7 @@ public class EmployeeStorageImpl implements EmployeeStorage{
 
     @Override
     public int createEmployee(EmployeeCreation employee) throws SQLException{
-        var sql = "insert into Employees(firstname, lastname, date) values (?, ?, ?)";
+        var sql = "insert into Employees(firstname, lastname, birthdate) values (?, ?, ?)";
         try (var con = getConnection();
              var stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, employee.getFirstname());
