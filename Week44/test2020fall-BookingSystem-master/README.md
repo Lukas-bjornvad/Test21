@@ -1,4 +1,5 @@
 ```
+These scripts have to be run to create the database and access it, necessary for getting the app to work
 docker run -d --rm --name mysql-test-db -e MYSQL_ROOT_PASSWORD=testuser123 -p 3307:3306 mysql
 
 create table Customers ( ID int not null auto_increment, Firstname varchar(255) not null, lastname varchar(255), birthdate date, PRIMARY KEY (ID));
@@ -9,6 +10,7 @@ create table Bookings ( ID int not null auto_increment, customerId int not null,
 
 insert into Customers(firstname, lastname) values( 'Carl', 'Carlson');
 
+Here's the data migration commands.
 create table CustomersPh ( ID int not null auto_increment, Firstname varchar(255) not null, lastname varchar(255), birthdate date, phonenumb varchar(255), PRIMARY KEY (ID));
 Insert into CustomersPh(Firstname, lastname, birthdate) SELECT Firstname, lastname, birthdate FROM Customers;
 ALTER TABLE Bookings DROP FOREIGN KEY Bookings_ibfk_1;
