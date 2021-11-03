@@ -11,7 +11,7 @@ public class CustomerStorageImpl implements CustomerStorage {
     private String connectionString;
     private String username, password;
 
-    public CustomerStorageImpl(String conStr, String user, String pass){
+    public CustomerStorageImpl(String conStr, String user, String pass) {
         connectionString = conStr;
         username = user;
         password = pass;

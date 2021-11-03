@@ -1,6 +1,7 @@
 package datalayer.booking;
 
 import dto.Booking;
+import dto.BookingCreation;
 
 import java.sql.*;
 import java.sql.Date;
@@ -34,12 +35,12 @@ public class BookingStorageImpl implements BookingStorage{
         }
 
     @Override
-    public int createBooking(Booking booking) throws SQLException {
+    public int createBooking(BookingCreation booking) throws SQLException {
         var sql = "insert into Employees(firstname, lastname) values (?, ?)";
         try (var con = getConnection();
              var stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            stmt.setInt(1, booking.getCustomerID());
-            stmt.setInt(2, booking.getEmployeeID());
+            stmt.setInt(1, booking.getCustomerId());
+            stmt.setInt(2, booking.getEmployeeId());
             stmt.setDate(3, (Date) booking.getDate());
             stmt.setTime(4, booking.getStart());
             stmt.setTime(5, booking.getEnd());
