@@ -3,6 +3,7 @@ package datalayer.employee;
 import dto.Booking;
 
 import dto.Employee;
+import dto.EmployeeCreation;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -26,13 +27,13 @@ public class EmployeeStorageImpl implements EmployeeStorage{
     }
 
     @Override
-    public int createEmployee(Employee employee) throws SQLException{
+    public int createEmployee(EmployeeCreation employee) throws SQLException{
         var sql = "insert into Employees(firstname, lastname) values (?, ?)";
         try (var con = getConnection();
              var stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            stmt.setString(1, employee.getFistname());
+            stmt.setString(1, employee.getFirstname());
             stmt.setString(2, employee.getLastname());
-            stmt.setDate(3, (Date) employee.getDate());
+            stmt.setDate(3, (Date) employee.getBirthdate());
             stmt.executeUpdate();
             // get the newly created id
             try (var resultSet = stmt.getGeneratedKeys()) {

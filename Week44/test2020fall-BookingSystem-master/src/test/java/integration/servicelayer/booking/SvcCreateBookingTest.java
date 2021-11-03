@@ -1,5 +1,7 @@
 package integration.servicelayer.booking;
 
+import datalayer.booking.BookingStorage;
+import datalayer.booking.BookingStorageImpl;
 import datalayer.customer.CustomerStorage;
 import datalayer.customer.CustomerStorageImpl;
 import dto.Booking;
@@ -24,13 +26,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class SvcCreateBookingTest extends ContainerizedDbIntegrationTest {
 
     private BookingService svc;
-    //    private BookingStorage storage;
+        private BookingStorage storage;
 
     @BeforeAll
     public void setup() {
         runMigration(3);
-//        storage = new BookingStorageImpl(getConnectionString(),"root", getDbPassword());
-//        svc = new BookingServiceImpl(storage);
+        storage = new BookingStorageImpl(getConnectionString(),"root", getDbPassword());
+        svc = new BookingServiceImpl(storage);
     }
 
     @Test
@@ -41,13 +43,14 @@ class SvcCreateBookingTest extends ContainerizedDbIntegrationTest {
         var date = new Date(1239821l);
         var start = new Time(1234567l);
         var end = new Time(1234567l);
-        int id = svc.createBooking(customerID, employeeID, date, start, end);
+
+        svc.createBooking(customerID, employeeID, date, start, end);
 
         // Act
-//        var createdBooking = ;
+        //var createdBooking = storage.getBookingsForCustomer(customerID)
 
         // Assert
-//        assertEquals(customerID, createdBooking.getFirstname());
-//        assertEquals(employeeID, createdBooking.getLastname());
+       // assertEquals(customerID, createdBooking.getCustomerID());
+       // assertEquals(employeeID, createdBooking.employeeID());
     }
 }
