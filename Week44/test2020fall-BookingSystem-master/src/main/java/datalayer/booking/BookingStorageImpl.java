@@ -24,7 +24,7 @@ public class BookingStorageImpl implements BookingStorage{
 
     @Override
     public Collection<Booking> getBookingsForCustomer(int customerId) throws SQLException {
-        Collection collection = new HashSet();
+        Collection collection = new ArrayList<Booking>();
         List<Booking> bookings = getBookings();
         for (int i = 0; i < bookings.size()-1; i++) {
             if(bookings.get(i).getCustomerID() == customerId) {
@@ -36,7 +36,7 @@ public class BookingStorageImpl implements BookingStorage{
 
     @Override
     public int createBooking(BookingCreation booking) throws SQLException {
-        var sql = "insert into Employees(firstname, lastname) values (?, ?)";
+        var sql = "insert into Booking(firstname, lastname) values (?, ?)";
         try (var con = getConnection();
              var stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setInt(1, booking.getCustomerId());

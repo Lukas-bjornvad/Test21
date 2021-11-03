@@ -10,7 +10,9 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
+import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Time;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -21,7 +23,7 @@ class CreateBookingTest extends ContainerizedDbIntegrationTest {
     private BookingStorage bookingStorage;
 
     /* changed code */
-/*
+
     @BeforeAll
     public void Setup() throws SQLException {
         runMigration(2);
@@ -34,11 +36,13 @@ class CreateBookingTest extends ContainerizedDbIntegrationTest {
         }
     }
 
-    /*private void addFakeBookings(int numBookings) throws SQLException {
+    private void addFakeBookings(int numBookings) throws SQLException {
         Faker faker = new Faker();
         for (int i = 0; i < numBookings; i++) {
-            BookingCreation c = new BookingCreation(faker.idNumber().hashCode(), faker.idNumber(), faker.date(), faker.);
-            BookingStorage.createBooking(c);
+            var time = new Time(12345678);
+            var time2 = new Time(12345678);
+            BookingCreation c = new BookingCreation(faker.idNumber().hashCode(), faker.idNumber().hashCode(), (Date)  faker.date().birthday(),time,time2);
+            bookingStorage.createBooking(c);
         }
 
     }
@@ -47,24 +51,23 @@ class CreateBookingTest extends ContainerizedDbIntegrationTest {
     public void mustSaveBookingInDatabaseWhenCallingCreateBooking() throws SQLException {
         // Arrange
         // Act
-        BookingStorage.createBooking(new BookingCreation("John","Carlssonn", null, null));
+        int cosid = 123;
+        int empid = 1234;
+        bookingStorage.createBooking(new BookingCreation(cosid,empid, null, null,null));
 
         // Assert
-        var Bookings = BookingStorage.getBookings();
-        assertTrue(
-                Bookings.stream().anyMatch(x ->
-                        x.getFirstname().equals("John") &&
-                        x.getLastname().equals("Carlssonn")));
+        var Bookings = bookingStorage.getBookings();
+        //assertTrue(2,2);
     }
 
     @Test
     public void mustReturnLatestId() throws SQLException {
         // Arrange
         // Act
-        var id1 = BookingStorage.createBooking(new BookingCreation("a", "b", null, null));
-        var id2 = BookingStorage.createBooking(new BookingCreation("c", "d" , null , null));
+        var id1 = bookingStorage.createBooking(new BookingCreation(1, 2, null, null,null));
+        var id2 = bookingStorage.createBooking(new BookingCreation(3, 4 , null , null,null));
 
         // Assert
         assertEquals(1, id2 - id1);
-    }*/
+    }
 }
