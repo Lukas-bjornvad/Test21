@@ -3,6 +3,7 @@ package integration.datalayer.booking;
 import com.github.javafaker.Faker;
 import datalayer.booking.BookingStorage;
 import datalayer.booking.BookingStorageImpl;
+import dto.BookingCreation;
 import integration.ContainerizedDbIntegrationTest;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Tag;
@@ -33,10 +34,10 @@ class CreateBookingTest extends ContainerizedDbIntegrationTest {
         }
     }
 
-    private void addFakeBookings(int numBookings) throws SQLException {
+    /*private void addFakeBookings(int numBookings) throws SQLException {
         Faker faker = new Faker();
         for (int i = 0; i < numBookings; i++) {
-            BookingCreation c = new BookingCreation(faker.name().firstName(), faker.name().lastName(), null, null);
+            BookingCreation c = new BookingCreation(faker.idNumber().hashCode(), faker.idNumber(), faker.date(), faker.);
             BookingStorage.createBooking(c);
         }
 
