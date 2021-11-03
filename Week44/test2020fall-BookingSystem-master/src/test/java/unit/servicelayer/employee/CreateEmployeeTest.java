@@ -1,6 +1,7 @@
 package unit.servicelayer.employee;
 
 import datalayer.customer.CustomerStorage;
+import datalayer.employee.EmployeeStorage;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -10,6 +11,7 @@ import servicelayer.customer.CustomerServiceException;
 import servicelayer.customer.CustomerServiceImpl;
 import servicelayer.employee.EmployeeService;
 import servicelayer.employee.EmployeeServiceException;
+import servicelayer.employee.EmployeeServiceImpl;
 
 import java.sql.Date;
 import java.sql.SQLException;
@@ -24,13 +26,13 @@ public class CreateEmployeeTest {
     private EmployeeService employeeService;
 
     // DOC (Depended-on Component)
-//    private EmployeeStorage storageMock;
+    private EmployeeStorage storageMock;
 
 
     @BeforeAll
     public void beforeAll(){
-//        storageMock = mock(EmployeeStorage.class);
-//        employeeService = new EmployeeServiceImpl(storageMock);
+        storageMock = mock(EmployeeStorage.class);
+        employeeService = new EmployeeServiceImpl(storageMock);
     }
 
     @Test
@@ -47,9 +49,9 @@ public class CreateEmployeeTest {
         // Can be read like: verify that storageMock was called 1 time on the method
         //   'createCustomer' with an argument whose 'firstname' == firstName and
         //   whose 'lastname' == lastName
- /*       verify(storageMock, times(1))
+        verify(storageMock, times(1))
                 .createEmployee(
                         argThat(x -> x.firstname.equals(firstName) &&
-                                x.lastname.equals(lastName)));*/
+                                x.lastname.equals(lastName)));
     }
 }

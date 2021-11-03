@@ -4,13 +4,13 @@ import java.util.Date;
 
 public class Employee {
     private int ID;
-    private String fistname;
+    private String firstname;
     private String lastname;
     private Date date;
 
-    public Employee(int ID, String fistname, String lastname, Date date) {
+    public Employee(int ID, String firstname, String lastname, Date date) {
         this.ID = ID;
-        this.fistname = fistname;
+        this.firstname = firstname;
         this.lastname = lastname;
         this.date = date;
     }
@@ -19,8 +19,8 @@ public class Employee {
         return ID;
     }
 
-    public String getFistname() {
-        return fistname;
+    public String getFirstname() {
+        return firstname;
     }
 
     public String getLastname() {
