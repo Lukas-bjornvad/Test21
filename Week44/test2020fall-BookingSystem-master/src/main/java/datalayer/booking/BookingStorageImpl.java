@@ -1,10 +1,7 @@
 package datalayer.booking;
 
 import dto.Booking;
-import dto.Customer;
-import dto.CustomerCreation;
 
-import java.awt.print.Book;
 import java.sql.*;
 import java.sql.Date;
 import java.util.*;
@@ -13,6 +10,12 @@ public class BookingStorageImpl implements BookingStorage{
 
     private String connectionString;
     private String username, password;
+
+    public BookingStorageImpl(String conStr, String user, String pass){
+        connectionString = conStr;
+        username = user;
+        password = pass;
+    }
 
     private Connection getConnection() throws SQLException {
         return DriverManager.getConnection(connectionString, username, password);
@@ -32,7 +35,7 @@ public class BookingStorageImpl implements BookingStorage{
 
     @Override
     public int createBooking(Booking booking) throws SQLException {
-        var sql = "insert into Customers(firstname, lastname) values (?, ?)";
+        var sql = "insert into Employees(firstname, lastname) values (?, ?)";
         try (var con = getConnection();
              var stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setInt(1, booking.getCustomerID());

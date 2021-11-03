@@ -1,8 +1,7 @@
 package datalayer.employee;
 
 import dto.Booking;
-import dto.Customer;
-import dto.CustomerCreation;
+
 import dto.Employee;
 
 import java.sql.*;
@@ -16,13 +15,19 @@ public class EmployeeStorageImpl implements EmployeeStorage{
     private String connectionString;
     private String username, password;
 
+    public EmployeeStorageImpl(String conStr, String user, String pass){
+        connectionString = conStr;
+        username = user;
+        password = pass;
+    }
+
     private Connection getConnection() throws SQLException {
         return DriverManager.getConnection(connectionString, username, password);
     }
 
     @Override
     public int createEmployee(Employee employee) throws SQLException{
-        var sql = "insert into Customers(firstname, lastname) values (?, ?)";
+        var sql = "insert into Employees(firstname, lastname) values (?, ?)";
         try (var con = getConnection();
              var stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, employee.getFistname());
@@ -43,7 +48,7 @@ public class EmployeeStorageImpl implements EmployeeStorage{
     @Override
     public Collection<Employee> getEmployeeWithId(int employeeId) throws SQLException {
         List<Employee> employees = new ArrayList<>();
-        var sql = "select ID, firstname, lastname, birthdate from Customers where id = ?";
+        var sql = "select ID, firstname, lastname, birthdate from Employees where id = ?";
         try (var con = getConnection();
              var stmt = con.prepareStatement(sql)) {
             stmt.setInt(1, employeeId);
