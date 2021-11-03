@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.util.Collection;
 import java.sql.Date;
+import java.util.List;
 
 public class BookingServiceImpl implements BookingService{
 
@@ -37,5 +38,10 @@ public class BookingServiceImpl implements BookingService{
     @Override
     public Collection<Booking> getBookingsForEmployee(int employeeId) {
         return null;
+    }
+
+    @Override
+    public List<Booking> getBookings() throws SQLException{
+        return bookingStorage.getBookings();
     }
 }

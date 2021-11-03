@@ -6,9 +6,11 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.util.Collection;
 import java.sql.Date;
+import java.util.List;
 
 public interface BookingService {
     int createBooking(int customerId, int employeeId, Date date, Time start, Time end) throws BookingServiceException;
     Collection<Booking> getBookingsForCustomer(int customerId) throws SQLException;
     Collection<Booking> getBookingsForEmployee(int employeeId);
+    List<Booking> getBookings() throws SQLException;
 }

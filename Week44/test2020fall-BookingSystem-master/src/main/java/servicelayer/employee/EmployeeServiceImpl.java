@@ -22,6 +22,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         try {
             return employeeStorage.createEmployee(new EmployeeCreation(firstName,lastName,birthdate));
         } catch (SQLException throwables) {
+            throwables.printStackTrace();
             throw new EmployeeServiceException(throwables.getMessage());
         }
     }

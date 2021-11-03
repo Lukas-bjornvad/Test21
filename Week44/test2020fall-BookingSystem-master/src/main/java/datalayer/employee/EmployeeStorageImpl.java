@@ -28,12 +28,12 @@ public class EmployeeStorageImpl implements EmployeeStorage{
 
     @Override
     public int createEmployee(EmployeeCreation employee) throws SQLException{
-        var sql = "insert into Employees(firstname, lastname) values (?, ?)";
+        var sql = "insert into Employees(firstname, lastname, date) values (?, ?, ?)";
         try (var con = getConnection();
              var stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, employee.getFirstname());
             stmt.setString(2, employee.getLastname());
-            stmt.setDate(3, (Date) employee.getBirthdate());
+            stmt.setDate(3, employee.getBirthdate());
             stmt.executeUpdate();
             // get the newly created id
             try (var resultSet = stmt.getGeneratedKeys()) {
