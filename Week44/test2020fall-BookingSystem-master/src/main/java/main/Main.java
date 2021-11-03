@@ -2,6 +2,7 @@ package main;
 
 import dto.Customer;
 import datalayer.customer.CustomerStorageImpl;
+import dto.CustomerCreation;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -14,8 +15,9 @@ public class Main {
 
     public static void main(String[] args) throws SQLException {
         CustomerStorageImpl storage = new CustomerStorageImpl(conStr, user, pass);
-        //DriverManager.getConnection("jdbc:mysql://localhost:3307/?user=root&password=testuser123");
         System.out.println("Got customers: ");
+        CustomerCreation adder = new CustomerCreation("Jar", "Rule", null, null);
+        storage.createCustomer(adder);
         for(Customer c : storage.getCustomers()) {
             System.out.println(toString(c));
         }

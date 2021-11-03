@@ -9,8 +9,8 @@ import servicelayer.customer.CustomerService;
 import servicelayer.customer.CustomerServiceException;
 import servicelayer.customer.CustomerServiceImpl;
 
+import java.sql.Date;
 import java.sql.SQLException;
-import java.util.Date;
 
 import static org.mockito.Mockito.*;
 
@@ -38,8 +38,9 @@ public class CreateCustomerTest {
         var firstName = "a";
         var lastName = "b";
         var birthdate = new Date(123456789l);
+        var phoneNumb = "+3515373524";
 
-        customerService.createCustomer(firstName, lastName, birthdate);
+        customerService.createCustomer(firstName, lastName, birthdate, phoneNumb);
 
         // Assert
         // Can be read like: verify that storageMock was called 1 time on the method

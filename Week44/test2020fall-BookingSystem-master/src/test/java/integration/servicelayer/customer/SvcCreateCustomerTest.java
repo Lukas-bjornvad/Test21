@@ -10,8 +10,8 @@ import servicelayer.customer.CustomerService;
 import servicelayer.customer.CustomerServiceException;
 import servicelayer.customer.CustomerServiceImpl;
 
+import java.sql.Date;
 import java.sql.SQLException;
-import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -34,7 +34,8 @@ class SvcCreateCustomerTest extends ContainerizedDbIntegrationTest {
         var firstName = "John";
         var lastName = "Johnson";
         var bday = new Date(1239821l);
-        int id = svc.createCustomer(firstName, lastName, bday);
+        var phoneNumb = "+4723894567";
+        int id = svc.createCustomer(firstName, lastName, bday, phoneNumb);
 
         // Act
         var createdCustomer = storage.getCustomerWithId(id);
