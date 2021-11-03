@@ -36,12 +36,12 @@ public class BookingStorageImpl implements BookingStorage{
 
     @Override
     public int createBooking(BookingCreation booking) throws SQLException {
-        var sql = "insert into Booking(customerID, employeeID,date,start,end) values (?, ?,?,?,?)";
+        var sql = "insert into Bookings(customerID, employeeID,date,start,end) values (?, ?,?,?,?)";
         try (var con = getConnection();
              var stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setInt(1, booking.getCustomerId());
             stmt.setInt(2, booking.getEmployeeId());
-            stmt.setDate(3, (Date) booking.getDate());
+            stmt.setDate(3, booking.getDate());
             stmt.setTime(4, booking.getStart());
             stmt.setTime(5, booking.getEnd());
 
