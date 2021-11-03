@@ -23,11 +23,11 @@ public class BookingStorageImpl implements BookingStorage{
     }
 
     @Override
-    public Collection<Booking> getBookingsForCustomer(int customerId) throws SQLException {
-        Collection collection = new ArrayList<Booking>();
+    public List<Booking> getBookingsForCustomer(int customerId) throws SQLException {
+        List collection = new ArrayList<Booking>();
         List<Booking> bookings = getBookings();
         for (int i = 0; i < bookings.size()-1; i++) {
-            if(bookings.get(i).getCustomerID() == customerId) {
+            if(bookings.get(i-1).getCustomerID() == customerId) {
                 collection.add(bookings);
             }
         }
