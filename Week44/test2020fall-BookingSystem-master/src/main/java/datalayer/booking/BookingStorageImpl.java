@@ -9,7 +9,6 @@ import java.util.*;
 public class BookingStorageImpl implements BookingStorage{
 
     private String connectionString;
-    private String test;
     private String username, password;
 
     public BookingStorageImpl(String conStr, String user, String pass){
