@@ -7,5 +7,5 @@ import java.sql.Date;
 
 public interface EmployeeService {
     int createEmployee(String firstName, String lastName, Date birthdate) throws EmployeeServiceException;
-    Employee getEmployeeByld(int employeeId);
+    Employee getEmployeeById(int employeeId);
 }

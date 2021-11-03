@@ -26,7 +26,7 @@ public class BookingStorageImpl implements BookingStorage{
     public Collection<Booking> getBookingsForCustomer(int customerId) throws SQLException {
         Collection collection = new HashSet();
         List<Booking> bookings = getBookings();
-        for (int i = 0; i < bookings.size(); i++) {
+        for (int i = 0; i < bookings.size()-1; i++) {
             if(bookings.get(i).getCustomerID() == customerId) {
                 collection.add(bookings);
             }

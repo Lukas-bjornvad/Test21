@@ -27,7 +27,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee getEmployeeByld(int employeeId) {
+    public Employee getEmployeeById(int employeeId) {
         return null;
     }
 }
