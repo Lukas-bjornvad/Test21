@@ -2,6 +2,10 @@
 These scripts have to be run to create the database and access it, necessary for getting the app to work
 docker run -d --rm --name mysql-test-db -e MYSQL_ROOT_PASSWORD=testuser123 -p 3307:3306 mysql
 
+docker exec -it mysql-test-db mysql -uroot -p
+
+use mysql;
+
 create table Customers ( ID int not null auto_increment, Firstname varchar(255) not null, lastname varchar(255), birthdate date, PRIMARY KEY (ID));
 
 create table Employees ( ID int not null auto_increment, firstname varchar(255) not null, lastname varchar(255) not null, birthdate date, PRIMARY KEY (ID));
