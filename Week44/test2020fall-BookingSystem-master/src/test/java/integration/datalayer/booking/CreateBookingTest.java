@@ -4,7 +4,9 @@ import com.github.javafaker.Faker;
 import datalayer.booking.BookingStorage;
 import datalayer.booking.BookingStorageImpl;
 import datalayer.customer.CustomerStorage;
+import datalayer.customer.CustomerStorageImpl;
 import datalayer.employee.EmployeeStorage;
+import datalayer.employee.EmployeeStorageImpl;
 import dto.BookingCreation;
 import dto.CustomerCreation;
 import dto.EmployeeCreation;
@@ -14,6 +16,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
 
@@ -32,15 +35,15 @@ class CreateBookingTest extends ContainerizedDbIntegrationTest {
     @BeforeAll
     public void Setup() throws SQLException {
         runMigration(2);
-
-
-
+        customerStorage = new CustomerStorageImpl(getConnectionString(), "root", getDbPassword());
+        employeeStorage = new EmployeeStorageImpl(getConnectionString(), "root", getDbPassword());
+        CustomerCreation c = new CustomerCreation("faker.name().firstName()", "faker.name().lastName()", null, null);
+        customerStorage.createCustomer(c);
+        java.sql.Date sqlStartDate = new java.sql.Date(12356899);
+        EmployeeCreation e = new EmployeeCreation("faker.name().firstName()", "faker.name().lastName()", sqlStartDate);
+        employeeStorage.createEmployee(e);
         bookingStorage = new BookingStorageImpl(getConnectionString(), "root", getDbPassword());
-
-        var numBookings = bookingStorage.getBookings().size();
-        if (numBookings < 100) {
-            addFakeBookings(100 - numBookings);
-        }
+            addFakeBookings(100);
     }
 
     private void addFakeBookings(int numBookings) throws SQLException {
@@ -49,54 +52,31 @@ class CreateBookingTest extends ContainerizedDbIntegrationTest {
             var time = new Time(12345678);
             var time2 = new Time(12345678);
             java.sql.Date sqlStartDate = new java.sql.Date(faker.date().birthday().getTime());
-            CustomerCreation c = new CustomerCreation(faker.name().firstName(), faker.name().lastName(), null, null);
-            customerStorage.createCustomer(c);
-            EmployeeCreation e = new EmployeeCreation(faker.name().firstName(), faker.name().lastName(), sqlStartDate);
-            employeeStorage.createEmployee(e);
-            BookingCreation b = new BookingCreation(i+1, i+1, sqlStartDate,time,time2);
+            BookingCreation b = new BookingCreation(1, 1, sqlStartDate,time,time2);
             bookingStorage.createBooking(b);
         }
 
     }
 
-    private void addFakeCustomers(int numCustomers) throws SQLException {
-        Faker faker = new Faker();
-        for (int i = 0; i < numCustomers; i++) {
-            CustomerCreation c = new CustomerCreation(faker.name().firstName(), faker.name().lastName(), null, null);
-            customerStorage.createCustomer(c);
-        }
-
-    }
-
-    private void addFakeEmployees(int numEmployees) throws SQLException {
-        Faker faker = new Faker();
-        for (int i = 0; i < numEmployees; i++) {
-            java.sql.Date sqlStartDate = new java.sql.Date(faker.date().birthday().getTime());
-            EmployeeCreation e = new EmployeeCreation(faker.name().firstName(), faker.name().lastName(), sqlStartDate);
-            employeeStorage.createEmployee(e);
-        }
-
-    }
 
     @Test
     public void mustSaveBookingInDatabaseWhenCallingCreateBooking() throws SQLException {
         // Arrange
         // Act
-        int cosid = 123;
-        int empid = 1234;
-        bookingStorage.createBooking(new BookingCreation(cosid,empid, null, null,null));
+
+        bookingStorage.createBooking(new BookingCreation(1,1, new Date(21345675), new Time(23456787),new Time(23456787)));
 
         // Assert
         var Bookings = bookingStorage.getBookings();
-        //assertTrue(2,2);
+        assertEquals(Bookings.size(),104);
     }
 
     @Test
     public void mustReturnLatestId() throws SQLException {
         // Arrange
         // Act
-        var id1 = bookingStorage.createBooking(new BookingCreation(1, 2, null, null,null));
-        var id2 = bookingStorage.createBooking(new BookingCreation(3, 4 , null , null,null));
+        var id1 = bookingStorage.createBooking(new BookingCreation(1, 1, new Date(21345675), new Time(23456787),new Time(23456787)));
+        var id2 = bookingStorage.createBooking(new BookingCreation(1, 1 , new Date(21345675) , new Time(23456787),new Time(23456787)));
 
         // Assert
         assertEquals(1, id2 - id1);
